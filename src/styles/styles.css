@@ -12,6 +12,7 @@ header {
 
 body{
   font: 'Roboto', sans-serif;
+  color: #707070;
   margin: 0 0 0 0;
   background: #F7F7F7 0% 0% no-repeat padding-box;
 }
@@ -21,11 +22,11 @@ body{
   width: 10%;
   align-items: center;
   justify-content: space-between;
-  padding-left: 5%;  
+  padding-left: 9%;  
 }
 
 .header-right {
-  padding-right: 5%;
+  padding-right: 9%;
   display: flex;
   width: 10%;
   align-items: center;
@@ -33,48 +34,244 @@ body{
 }
 
 .tgl {
+  cursor: pointer;
   font-size: 44px;
-  font: italic;
+  font-style: italic;
   font-weight: 700;
 
 }
 
 .account, .logout {
+  cursor: pointer;
   font-size: 20px;  
   font-style: italic;
   font-weight: 700;
 
 }
+
 
 .home {
+  cursor: pointer;
   font-size: 20px;  
   font-style: italic;
   font-style: italic;
   font-weight: 700;
 }
 
+.content {
+  display: flex;  
+  padding-top: 50px;
+  padding-left: 9%;
+}
 
+.content-on-left {    
+  width: 45%;  
+}
+
+.title {  
+  font-size: 24px;  
+  font-style: italic;
+}
+
+.subtitle{
+  padding-top: 33px;
+  font-weight: 700;  
+}
+
+.description {
+  font-size: 17px;
+}
+
+.game-selector {
+  padding-top: 29px;  
+}
+
+.lotofacil, .megasena, .lotomania {    
+  transition: 0.3s;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  background: white;
+  border-radius: 20px;
+  width: 100px;
+  height: 30px;
+  font-size: 14px;  
+  margin-right: 2em;
+}
+
+.lotofacil {  
+  color: #7F3992;
+  border: 2px solid #7F3992;
+}
+
+.lotofacil:hover {
+  background: #7F3992;
+  color: white;
+}
+
+.megasena {
+  color: #01AC66;
+  border: 2px solid #01AC66;
+}
+
+.megasena:hover {
+  background: #01AC66;
+  color: white;
+}
+
+.lotomania {
+  color: #F79C31;
+  border: 2px solid #F79C31;
+}
+
+.lotomania:hover {
+  background: #F79C31;
+  color: white;
+}
 
 .numbers-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.numbers-page {
   display: flex;
 }
 
 .numbers {    
-  display: flex;
+  display: flex;  
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;    
-  border-radius: 100px;
+  width: 200px;
+  height: 65px;    
+  border-radius: 100%;
   margin-right: 10px;
   background: #ADC0C4;
-  color: white;
+  color: white;  
+  margin-right: 24px;  
+  margin-bottom: 20px;
 }
 
 .numbers:hover {
   cursor: pointer;
 }
 
-button:focus {
-  background: #FFF;
+.bottom-buttons {
+  display: flex;
+  margin-top: 20px;
+  width: 97%;
+  justify-content: space-between;  
+}
+
+#complete-game, #clear-game {
+  font-weight: 700;
+  cursor: pointer;
+  background: white;
+  color: #01AC66;
+  border: 1px solid #01AC66;  
+  height: 45px;
+  border-radius: 0.9em;
+  transition: 0.3s;
+}
+
+#complete-game  {
+  width: 12em;  
+}
+
+#complete-game:hover, #clear-game:hover {
+  color: white;
+  background-color: #01AC66;
+}
+
+#clear-game {
+  width: 9em;
+}
+
+#create-game {
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  background-color:#01AC66;
+  display: flex;
+  width: 15em;
+  height: 45px;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #01AC66; 
+  border-radius: 0.9em;
+  padding-right: 4em;  
+  padding-left: 2em;
+}
+
+.cart-image {
+  width: 25px;
+  height: 25px;
+  color: white;
+  background-color: #01AC66;
+}
+
+.complete-clear {
+  display: flex;
+  width: 40%;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.content-on-right {
+  width: 30%;
+  margin-left: 5%;
+}
+
+.main-content {       
+  flex-wrap: wrap;
+  border: 1px solid #E2E2E2;   
+  width: 100%;
+  height: 25em;
+  background-color: white;
+  border-top-left-radius: 0.9em;  
+  border-top-right-radius: 0.9em;  
+
+}
+
+.foot-save {  
+  display: flex;
+  background: #F4F4F4;
+  border: 1px solid #E2E2E2;
+  border-top: none;
+  border-bottom-right-radius: 0.9em;
+  border-bottom-left-radius: 0.9em;
+  width: 100%;
+  height: 5em;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;  
+}
+
+.foot-save:hover {
+  filter: alpha(opacity=100);
+  opacity: 0.7;
+  transition: opacity .15s ease-in-out ;
+}
+
+.foot-save p {  
+  font-size: 35px;
+  font-weight: 700;
+  color: #27C383;
+}
+
+.right-title {
+  padding-left: 2.5em;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.game-description {
+  width: 100%;
+  height: 15.8em;
+}
+
+.cart-total {
+  padding-left: 3em;
+  font-size: 24px;
 }

@@ -12,22 +12,64 @@
   var buttonMania = doc.querySelector('[data-js="button-lotomania"');
   var buttonFacil = doc.querySelector('[data-js="button-lotofacil"');
   var buttonSena = doc.querySelector('[data-js="button-mega"');
+
+  var gameData;
+
+  function dataLoader() {
+    var ajax = new XMLHttpRequest();
+
+    ajax.open('GET', "assets/games.json");
+    ajax.send();
+
+    var data; 
+
+    data = ajax.addEventListener('readystatechange', function()  {
+      if(ajax.readyState === 4 && ajax.status === 200) {
+        data = JSON.parse(ajax.responseText);                 
+
+        contentLoader(data);
+      }
+    })        
+
+    return data;
+  }
   
-  
+  dataLoader();
+
+  function contentLoader(data) {
+    var $title = doc.querySelector('[data-js="game-type"]');
+
+    var $description = doc.querySelector('[data-js="game-describer"]');    
+
+    if(array === 1){
+      $title.textContent = data["types"][2]["type"];
+      $description.textContent = data["types"][2]["description"];
+    } else if(array === 2){
+      $title.textContent = data["types"][0]["type"];
+      $description.textContent = data["types"][0]["description"];
+    } else if(array === 3){
+      $title.textContent = data["types"][1]["type"];
+      $description.textContent = data["types"][1]["description"];
+    }  
+  }
+      
   buttonMania.addEventListener('click', function(e) {
     e.preventDefault();
+    dataLoader();
 
     array = arrayDefiner("lotomania");
   });
 
   buttonFacil.addEventListener('click', function(e) {
     e.preventDefault();
+    dataLoader();
 
     array = arrayDefiner("lotofacil");
   });
 
   buttonSena.addEventListener('click', function(e) {
     e.preventDefault();
+    dataLoader();
 
     array = arrayDefiner("megasena");
   });
