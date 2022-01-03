@@ -1,0 +1,80 @@
+header {
+  font: 'Roboto', sans-serif;
+  display: flex;
+  color: #707070;
+  width: 100%;  
+  height: 4.5em;
+  align-items: center;  
+  vertical-align: middle;
+  justify-content: space-between;  
+  border-bottom: 1px solid #8C9291;   
+}
+
+body{
+  font: 'Roboto', sans-serif;
+  margin: 0 0 0 0;
+  background: #F7F7F7 0% 0% no-repeat padding-box;
+}
+
+.header-left {
+  display: flex;
+  width: 10%;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 5%;  
+}
+
+.header-right {
+  padding-right: 5%;
+  display: flex;
+  width: 10%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tgl {
+  font-size: 44px;
+  font: italic;
+  font-weight: 700;
+
+}
+
+.account, .logout {
+  font-size: 20px;  
+  font-style: italic;
+  font-weight: 700;
+
+}
+
+.home {
+  font-size: 20px;  
+  font-style: italic;
+  font-style: italic;
+  font-weight: 700;
+}
+
+
+
+.numbers-div {
+  display: flex;
+}
+
+.numbers {    
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;    
+  border-radius: 100px;
+  margin-right: 10px;
+  background: #ADC0C4;
+  color: white;
+}
+
+.numbers:hover {
+  cursor: pointer;
+}
+
+button:focus {
+  background: #FFF;
+}
