@@ -57,7 +57,11 @@
   buttonCompleteGame.addEventListener('click', function(e) {
     e.preventDefault();
 
+    clearGame();
+
     completeGame(array);
+
+    fullFillNumberFields(array);
   });
 
   buttonClearGame.addEventListener('click', function(e) {
@@ -107,6 +111,34 @@
     array = arrayDefiner("megasena");
   });
 
+  function fullFillNumberFields(array){    
+    if(array === 1) {
+      lotomania.forEach(function(numero){
+        numberBottons.forEach(function(item) {
+          if(+item.textContent === +numero) {
+            item.classList.add("active-number-botton-mania");
+          }
+        })
+      });
+    } else if (array === 2) {
+      lotofacil.forEach(function(numero){
+        numberBottons.forEach(function(item) {
+          if(+item.textContent === +numero) {
+            item.classList.add("active-number-botton-facil");
+          }
+        })
+      });
+    } else if (array === 3) {
+      megasena.forEach(function(numero){
+        numberBottons.forEach(function(item) {
+          if(+item.textContent === +numero) {
+            item.classList.add("active-number-botton-sena");
+          }
+        })
+      });
+    }
+  }
+
   function completeGame(gameType) {
     if(gameType === 1) {
       lotomania = [];
@@ -121,7 +153,7 @@
       lotofacil = [];
       megasena = [];
       for( var i = 0; i < 15; i++) {
-        lotofacil.push(Math.floor(Math.random() * 80 + 1));
+        lotofacil.push(Math.floor(Math.random() * 25 + 1));
       }
       console.log(lotofacil);
     } else if (gameType === 3) {
@@ -129,7 +161,7 @@
       lotofacil = [];
       megasena = [];
       for( var i = 0; i < 6; i++) {
-        megasena.push(Math.floor(Math.random() * 80 + 1));
+        megasena.push(Math.floor(Math.random() * 60 + 1));
       }
       console.log(megasena);
     }    
