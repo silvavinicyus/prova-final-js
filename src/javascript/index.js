@@ -11,9 +11,10 @@
 
   var buttonMania = doc.querySelector('[data-js="button-lotomania"');
   var buttonFacil = doc.querySelector('[data-js="button-lotofacil"');
-  var buttonSena = doc.querySelector('[data-js="button-mega"');
+  var buttonSena = doc.querySelector('[data-js="button-mega"');    
 
-  var gameData;
+  var buttonClearGame = doc.querySelector('[id="clear-game"]');
+  var buttonCompleteGame = doc.querySelector('[id="complete-game"]');
 
   function dataLoader() {
     var ajax = new XMLHttpRequest();
@@ -34,7 +35,7 @@
     return data;
   }
   
-  dataLoader();
+  dataLoader();  
 
   function contentLoader(data) {
     var $title = doc.querySelector('[data-js="game-type"]');
@@ -52,10 +53,30 @@
       $description.textContent = data["types"][1]["description"];
     }  
   }
+
+  buttonCompleteGame.addEventListener('click', function(e) {
+    e.preventDefault();
+
+    completeGame(array);
+  });
+
+  buttonClearGame.addEventListener('click', function(e) {
+    e.preventDefault();
+
+    clearGame();
+    
+    return;
+  });
       
   buttonMania.addEventListener('click', function(e) {
     e.preventDefault();
     dataLoader();
+
+    buttonMania.classList.toggle("active-lotomania");    
+    buttonFacil.classList.remove("active-lotofacil");
+    buttonSena.classList.remove("active-mega");
+
+    clearGame();
 
     array = arrayDefiner("lotomania");
   });
@@ -64,6 +85,12 @@
     e.preventDefault();
     dataLoader();
 
+    buttonFacil.classList.toggle("active-lotofacil");    
+    buttonMania.classList.remove("active-lotomania");
+    buttonSena.classList.remove("active-mega");
+
+    clearGame();
+
     array = arrayDefiner("lotofacil");
   });
 
@@ -71,8 +98,42 @@
     e.preventDefault();
     dataLoader();
 
+    buttonSena.classList.toggle("active-mega");
+    buttonMania.classList.remove("active-lotomania");
+    buttonFacil.classList.remove("active-lotofacil");
+
+    clearGame();
+
     array = arrayDefiner("megasena");
   });
+
+  function completeGame(gameType) {
+    if(gameType === 1) {
+      lotomania = [];
+      lotofacil = [];
+      megasena = [];
+      for( var i = 0; i < 5; i++) {
+        lotomania.push(Math.floor(Math.random() * 80 + 1));
+      }
+      console.log(lotomania);
+    } else if (gameType === 2) {
+      lotomania = [];
+      lotofacil = [];
+      megasena = [];
+      for( var i = 0; i < 15; i++) {
+        lotofacil.push(Math.floor(Math.random() * 80 + 1));
+      }
+      console.log(lotofacil);
+    } else if (gameType === 3) {
+      lotomania = [];
+      lotofacil = [];
+      megasena = [];
+      for( var i = 0; i < 6; i++) {
+        megasena.push(Math.floor(Math.random() * 80 + 1));
+      }
+      console.log(megasena);
+    }    
+  }
   
   function arrayDefiner(option) {
     switch (option) {
@@ -85,27 +146,38 @@
     }
   }
 
+  function clearGame() {
+    lotofacil = [];
+    lotomania = [];
+    megasena = [];
+
+    numberBottons.forEach(function(item) {
+      item.classList.remove("active-number-botton-mania"); 
+      item.classList.remove("active-number-botton-facil"); 
+      item.classList.remove("active-number-botton-sena");  
+    });
+  }
+
   numberBottons.forEach(function(item) {
     item.addEventListener('click', function(e) {
-      e.preventDefault();
-
-      console.log(array)
+      e.preventDefault();      
 
       switch (array){
         case 1:
-          lotomania.push(item.textContent);
-          console.log("lotomania",  lotomania);
+          lotomania.push(item.textContent)
+          item.classList.add("active-number-botton-mania");                             
+          console.log(lotomania);
           break;
         case 2:
           lotofacil.push(item.textContent);
-          console.log("lotofacil", lotofacil);
+          item.classList.add("active-number-botton-facil");               
           break;
         case 3:
           megasena.push(item.textContent);  
-          console.log("megasena", megasena);  
+          item.classList.add("active-number-botton-sena");               
           break;    
-      }
-      
-    })
+      }      
+    });
   });  
 })(window, document);
+

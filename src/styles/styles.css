@@ -131,6 +131,8 @@ body{
 .numbers-div {
   display: flex;
   flex-direction: column;
+  height: 25em;
+  overflow: scroll;
 }
 
 .numbers-page {
@@ -274,4 +276,37 @@ body{
 .cart-total {
   padding-left: 3em;
   font-size: 24px;
+}
+
+.active-lotomania {
+  background: #F79C31;  
+  color: white;
+}
+
+.active-lotofacil {
+  background: #7F3992;
+  color: white;
+}
+
+.active-mega {
+  background: #01AC66;
+  color: white;
+}
+
+.active-number-botton-mania {
+  background: #F79C31;
+  color: white;
+  pointer-events: none;
+}
+
+.active-number-botton-facil {
+  background: #7F3992;
+  color: white;
+  pointer-events: none;
+}
+
+.active-number-botton-sena {
+  background: #01AC66;
+  color: white;
+  pointer-events: none;
 }
