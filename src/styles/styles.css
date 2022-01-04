@@ -132,7 +132,8 @@ body{
   display: flex;
   flex-direction: column;
   height: 25em;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .numbers-page {
@@ -221,7 +222,7 @@ body{
 }
 
 .content-on-right {
-  width: 30%;
+  width: 27.5%;
   margin-left: 5%;
 }
 
@@ -268,13 +269,16 @@ body{
   font-weight: 700;
 }
 
-.game-description {
+.game-box {
   width: 100%;
   height: 15.8em;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  
 }
 
 .cart-total {
-  padding-left: 3em;
+  padding-left: 2.5em;
   font-size: 24px;
 }
 
@@ -309,4 +313,79 @@ body{
   background: #01AC66;
   color: white;
   pointer-events: none;
+}
+
+
+.img-dumpster {
+  width: 30px;
+  height: 30px;
+}
+
+.div-img {
+  display: flex;
+  cursor: pointer;
+  align-items: center;  
+}
+
+.divider {
+  width: 4px;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  border-radius: 10em;  
+}
+
+.game-description {
+  display: flex;      
+  height: 4.5em;
+  margin-right: 4em;
+  margin-left: 4em;
+  margin-bottom: 1em;
+}
+
+.description-game {
+  display: flex;
+  align-items: center  ;
+}
+
+.centralizer .game-numbers {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.game-price {
+  margin-top: 0.5em;
+}
+
+.game-name {
+  color: #7F3992;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.game-value {
+  margin-left: 0.5em;
+}
+
+.active-divider-lotofacil {
+  background: #7F3992;
+}
+
+.active-divider-lotomania {
+  background: #F79C31;
+}
+
+.active-divider-megasena {
+  background: #01AC66;
+}
+
+.active-span-lotofacil {
+  color: #7F3992;
+}
+
+.active-span-lotomania {
+  color: #F79C31;
+}
+
+.active-span-megasena {
+  color: #01AC66;
 }
