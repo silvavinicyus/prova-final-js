@@ -20,6 +20,8 @@
   var buttonCreateGame = doc.querySelector('[id="create-game"]');
   var spanPrice = doc.querySelector('[class="price"]');
 
+  var saveParagraph = doc.querySelector('[class="p-save"]');
+
   function dataLoader() {
     var ajax = new XMLHttpRequest();
 
@@ -39,6 +41,10 @@
   }
 
   buttonMania.classList.add("active-lotomania");
+  buttonCompleteGame.classList.add("complete-clear-border-lotomania");
+  buttonClearGame.classList.add("complete-clear-border-lotomania");
+  buttonCreateGame.classList.add("create-game-lotomania");
+  saveParagraph.classList.add("foot-save-lotomania");
 
   dataLoader();
 
@@ -118,6 +124,22 @@
     buttonFacil.classList.remove("active-lotofacil");
     buttonSena.classList.remove("active-mega");
 
+    buttonCompleteGame.classList.add("complete-clear-border-lotomania");
+    buttonClearGame.classList.add("complete-clear-border-lotomania");
+    buttonCompleteGame.classList.remove("complete-clear-border-megasena");
+    buttonClearGame.classList.remove("complete-clear-border-megasena");
+    buttonCompleteGame.classList.remove("complete-clear-border-lotofacil");
+    buttonClearGame.classList.remove("complete-clear-border-lotofacil");
+    
+    buttonCreateGame.classList.add("create-game-lotomania");
+    buttonCreateGame.classList.remove("create-game-lotofacil");
+    buttonCreateGame.classList.remove("create-game-megasena");
+
+    saveParagraph.classList.add("foot-save-lotomania");
+    saveParagraph.classList.remove("foot-save-lotofacil");
+    saveParagraph.classList.remove("foot-save-megasena");
+
+
     clearGame();
 
     array = arrayDefiner("lotomania");
@@ -131,6 +153,22 @@
     buttonMania.classList.remove("active-lotomania");
     buttonSena.classList.remove("active-mega");
 
+    buttonCompleteGame.classList.add("complete-clear-border-lotofacil");
+    buttonClearGame.classList.add("complete-clear-border-lotofacil");
+
+    buttonCompleteGame.classList.remove("complete-clear-border-lotomania");
+    buttonClearGame.classList.remove("complete-clear-border-lotomania");
+    buttonCompleteGame.classList.remove("complete-clear-border-megasena");
+    buttonClearGame.classList.remove("complete-clear-border-megasena");
+
+    buttonCreateGame.classList.add("create-game-lotofacil");
+    buttonCreateGame.classList.remove("create-game-lotomania");
+    buttonCreateGame.classList.remove("create-game-megasena");
+
+    saveParagraph.classList.add("foot-save-lotofacil");
+    saveParagraph.classList.remove("foot-save-lotomania");
+    saveParagraph.classList.remove("foot-save-megasena");
+
     clearGame();
 
     array = arrayDefiner("lotofacil");
@@ -143,6 +181,21 @@
     buttonSena.classList.toggle("active-mega");
     buttonMania.classList.remove("active-lotomania");
     buttonFacil.classList.remove("active-lotofacil");
+
+    buttonCompleteGame.classList.add("complete-clear-border-megasena");
+    buttonClearGame.classList.add("complete-clear-border-megasena");
+    buttonCompleteGame.classList.remove("complete-clear-border-lotomania");
+    buttonClearGame.classList.remove("complete-clear-border-lotomania");
+    buttonCompleteGame.classList.remove("complete-clear-border-lotofacil");
+    buttonClearGame.classList.remove("complete-clear-border-lotofacil");
+
+    buttonCreateGame.classList.add("create-game-megasena");
+    buttonCreateGame.classList.remove("create-game-lotomania");
+    buttonCreateGame.classList.remove("create-game-lotofacil");
+    
+    saveParagraph.classList.add("foot-save-megasena");
+    saveParagraph.classList.remove("foot-save-lotomania");
+    saveParagraph.classList.remove("foot-save-lotofacil");
 
     clearGame();
 
