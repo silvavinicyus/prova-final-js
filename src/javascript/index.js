@@ -1,9 +1,7 @@
 (function(win, doc){
-  'use strict';
+  'use strict';  
 
-  let lotomania = [];
-  let lotofacil = [];
-  let megasena =  [];
+  let loteryNumbers = [];
 
   let totalValue = 0;
 
@@ -38,7 +36,10 @@
       }
     })            
     return data;
-  }  
+  }    
+
+  dataLoader();
+  verifyEmptyCart(totalValue);
 
   buttonFacil.classList.add("active-lotofacil");
   buttonCompleteGame.classList.add("complete-clear-border-lotofacil");
@@ -46,7 +47,6 @@
   buttonCreateGame.classList.add("create-game-lotofacil");
   saveParagraph.classList.add("foot-save-lotofacil");
 
-  dataLoader();
 
   function contentLoader(data) {
     let $title = doc.querySelector('[data-js="game-type"]');
@@ -69,32 +69,30 @@
 
   buttonCreateGame.addEventListener('click', function(e) {
     if(array === 1) {
-      let numerosValidos = checkQtdNumbers(lotomania, 5);
+      let numerosValidos = checkQtdNumbers(loteryNumbers, 5);
 
       if(numerosValidos) {
-        createGameElement(lotomania, "Lotomania", "2,00");
+        createGameElement(loteryNumbers, "Lotomania", "2,00");
 
         spanPrice.textContent = alterTotalvalue(2);
-
       }
 
     } else if (array === 2) {
-      let numerosValidos = checkQtdNumbers(lotofacil, 15);
+      let numerosValidos = checkQtdNumbers(loteryNumbers, 15);
 
       if(numerosValidos) {
-        createGameElement(lotofacil, "Lotofácil", "2,50");
+        createGameElement(loteryNumbers, "Lotofácil", "2,50");
 
         spanPrice.textContent = alterTotalvalue(2.5);
       }
 
     } else if (array === 3) {
-      let numerosValidos = checkQtdNumbers(megasena, 6);
+      let numerosValidos = checkQtdNumbers(loteryNumbers, 6);
 
       if(numerosValidos) {
-        createGameElement(megasena, "Mega-Sena", "4,50");
+        createGameElement(loteryNumbers, "Mega-Sena", "4,50");
         spanPrice.textContent = alterTotalvalue(4.5);
       }
-
     }
   });
 
@@ -223,11 +221,12 @@
       $gameDescriptionDiv.parentNode.removeChild($gameDescriptionDiv);
       
       
-      gamePrice = gamePrice.replace(/,/, '.');
-      
-      console.log(gamePrice);
+      gamePrice = gamePrice.replace(/,/, '.');            
 
       spanPrice.textContent = alterTotalvalue(Number(gamePrice) * -1 );
+
+      verifyEmptyCart(totalValue);      
+      console.log(totalValue);
     };
 
     let $dividerDiv = doc.createElement('div');
@@ -297,7 +296,7 @@
 
   function fullFillNumberFields(array){    
     if(array === 1) {
-      lotomania.forEach(function(numero){
+      loteryNumbers.forEach(function(numero){
         numberBottons.forEach(function(item) {
           if(+item.textContent === +numero) {
             item.classList.add("active-number-botton-mania");
@@ -305,7 +304,7 @@
         })
       });
     } else if (array === 2) {
-      lotofacil.forEach(function(numero){
+      loteryNumbers.forEach(function(numero){
         numberBottons.forEach(function(item) {
           if(+item.textContent === +numero) {
             item.classList.add("active-number-botton-facil");
@@ -313,7 +312,7 @@
         })
       });
     } else if (array === 3) {
-      megasena.forEach(function(numero){
+      loteryNumbers.forEach(function(numero){
         numberBottons.forEach(function(item) {
           if(+item.textContent === +numero) {
             item.classList.add("active-number-botton-sena");
@@ -324,9 +323,7 @@
   }
 
   function arrayCleaner() {
-    lotomania = [];
-    lotofacil = [];
-    megasena = [];
+    loteryNumbers = [];
   }
 
   function completeGame(gameType) {
@@ -343,7 +340,7 @@
       
       for (let i = 0; i<5; i++) {
         aux = Math.floor(Math.random() * (arrayNumeros.length - 1) + 1);
-        lotomania.push(arrayNumeros[aux]);        
+        loteryNumbers.push(arrayNumeros[aux]);        
         arrayNumeros.splice(aux, 1)
       }      
     } else if (gameType === 2) {
@@ -358,7 +355,7 @@
       
       for (var i = 0; i<15; i++) {
         aux = Math.floor(Math.random() * (arrayNumeros.length - 1) + 1);        
-        lotofacil.push(arrayNumeros[aux]);        
+        loteryNumbers.push(arrayNumeros[aux]);        
         arrayNumeros.splice(aux, 1)        
       }      
     } else if (gameType === 3) {
@@ -374,7 +371,7 @@
       
       for (var i = 0; i<6; i++) {
         aux = Math.floor(Math.random() * (arrayNumeros.length - 1) + 1);
-        megasena.push(arrayNumeros[aux]);        
+        loteryNumbers.push(arrayNumeros[aux]);        
         arrayNumeros.splice(aux, 1)
       }      
     }         
@@ -407,15 +404,15 @@
 
       switch (array){
         case 1:
-          lotomania.push(item.textContent)
+          loteryNumbers.push(item.textContent)
           item.classList.add("active-number-botton-mania");                                       
           break;
         case 2:
-          lotofacil.push(item.textContent);
+          loteryNumbers.push(item.textContent);
           item.classList.add("active-number-botton-facil");               
           break;
         case 3:
-          megasena.push(item.textContent);  
+          loteryNumbers.push(item.textContent);  
           item.classList.add("active-number-botton-sena");               
           break;    
       }      
