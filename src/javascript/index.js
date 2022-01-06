@@ -71,7 +71,7 @@
     try {
       let $gameBox = doc.querySelector('[data-js="game-box-js"]');
       $gameBox.classList.remove("game-box-flex");
-      emptyCartRemover($gameBox);
+      emptyCartElementRemover($gameBox);
     } catch ( err ){};
 
     if(array === 1) {
@@ -81,6 +81,8 @@
         createGameElement(loteryNumbers, "Lotomania", "2,00");
 
         spanPrice.textContent = alterTotalvalue(2);
+
+        clearGame();
       }
     } else if (array === 2) {
       let numerosValidos = checkQtdNumbers(loteryNumbers, 15);
@@ -89,6 +91,7 @@
         createGameElement(loteryNumbers, "Lotofácil", "2,50");
 
         spanPrice.textContent = alterTotalvalue(2.5);
+        clearGame();
       }
 
     } else if (array === 3) {
@@ -96,7 +99,9 @@
 
       if(numerosValidos) {
         createGameElement(loteryNumbers, "Mega-Sena", "4,50");
+        
         spanPrice.textContent = alterTotalvalue(4.5);
+        clearGame();
       }
     }
   });
@@ -293,7 +298,7 @@
     } 
   }
 
-  function emptyCartRemover($gameBox) {
+  function emptyCartElementRemover($gameBox) {
     let $emptyCartDiv = doc.querySelector('[class="empty-cart"]');
 
     $gameBox.removeChild($emptyCartDiv);
