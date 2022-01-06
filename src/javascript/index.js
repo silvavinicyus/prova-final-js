@@ -1,34 +1,34 @@
 (function(win, doc){
   'use strict';
 
-  var lotomania = [];
-  var lotofacil = [];
-  var megasena =  [];  
+  let lotomania = [];
+  let lotofacil = [];
+  let megasena =  [];
 
-  var totalValue = 0;
+  let totalValue = 0;
 
-  var array = 1;
+  let array = 2;
 
-  var numberBottons = doc.querySelectorAll('[class="numbers"]');
+  let numberBottons = doc.querySelectorAll('[class="numbers"]');
 
-  var buttonMania = doc.querySelector('[data-js="button-lotomania"');
-  var buttonFacil = doc.querySelector('[data-js="button-lotofacil"');
-  var buttonSena = doc.querySelector('[data-js="button-mega"');    
+  let buttonMania = doc.querySelector('[data-js="button-lotomania"');
+  let buttonFacil = doc.querySelector('[data-js="button-lotofacil"');
+  let buttonSena = doc.querySelector('[data-js="button-mega"');    
 
-  var buttonClearGame = doc.querySelector('[id="clear-game"]');
-  var buttonCompleteGame = doc.querySelector('[id="complete-game"]');
-  var buttonCreateGame = doc.querySelector('[id="create-game"]');
-  var spanPrice = doc.querySelector('[class="price"]');
+  let buttonClearGame = doc.querySelector('[id="clear-game"]');
+  let buttonCompleteGame = doc.querySelector('[id="complete-game"]');
+  let buttonCreateGame = doc.querySelector('[id="create-game"]');
+  let spanPrice = doc.querySelector('[class="price"]');
 
-  var saveParagraph = doc.querySelector('[class="p-save"]');
+  let saveParagraph = doc.querySelector('[class="p-save"]');
 
   function dataLoader() {
-    var ajax = new XMLHttpRequest();
+    let ajax = new XMLHttpRequest();
 
     ajax.open('GET', "assets/games.json");
     ajax.send();
 
-    var data; 
+    let data; 
 
     data = ajax.addEventListener('readystatechange', function()  {
       if(ajax.readyState === 4 && ajax.status === 200) {
@@ -38,20 +38,20 @@
       }
     })            
     return data;
-  }
+  }  
 
-  buttonMania.classList.add("active-lotomania");
-  buttonCompleteGame.classList.add("complete-clear-border-lotomania");
-  buttonClearGame.classList.add("complete-clear-border-lotomania");
-  buttonCreateGame.classList.add("create-game-lotomania");
-  saveParagraph.classList.add("foot-save-lotomania");
+  buttonFacil.classList.add("active-lotofacil");
+  buttonCompleteGame.classList.add("complete-clear-border-lotofacil");
+  buttonClearGame.classList.add("complete-clear-border-lotofacil");
+  buttonCreateGame.classList.add("create-game-lotofacil");
+  saveParagraph.classList.add("foot-save-lotofacil");
 
   dataLoader();
 
   function contentLoader(data) {
-    var $title = doc.querySelector('[data-js="game-type"]');
+    let $title = doc.querySelector('[data-js="game-type"]');
 
-    var $description = doc.querySelector('[data-js="game-describer"]');    
+    let $description = doc.querySelector('[data-js="game-describer"]');    
 
     spanPrice.textContent = totalValue;
 
@@ -69,7 +69,7 @@
 
   buttonCreateGame.addEventListener('click', function(e) {
     if(array === 1) {
-      var numerosValidos = checkQtdNumbers(lotomania, 5);
+      let numerosValidos = checkQtdNumbers(lotomania, 5);
 
       if(numerosValidos) {
         createGameElement(lotomania, "Lotomania", "2,00");
@@ -79,7 +79,7 @@
       }
 
     } else if (array === 2) {
-      var numerosValidos = checkQtdNumbers(lotofacil, 15);
+      let numerosValidos = checkQtdNumbers(lotofacil, 15);
 
       if(numerosValidos) {
         createGameElement(lotofacil, "Lotofácil", "2,50");
@@ -88,7 +88,7 @@
       }
 
     } else if (array === 3) {
-      var numerosValidos = checkQtdNumbers(megasena, 6);
+      let numerosValidos = checkQtdNumbers(megasena, 6);
 
       if(numerosValidos) {
         createGameElement(megasena, "Mega-Sena", "4,50");
@@ -203,20 +203,19 @@
   });
 
   function createGameElement(gameNumbers, gameName, gamePrice) {
-    var $gameBox = doc.querySelector('[class="game-box"]');
+    let $gameBox = doc.querySelector('[class="game-box"]');
 
-    var $gameDescriptionDiv = doc.createElement('div');    
+    let $gameDescriptionDiv = doc.createElement('div');    
     $gameDescriptionDiv.classList.add("game-description");
 
-    var $divImg = doc.createElement('div')
+    let $divImg = doc.createElement('div');
     $divImg.classList.add("div-img");
 
-    var $imgDumpster = doc.createElement('img');
+    let $imgDumpster = doc.createElement('img');
     $imgDumpster.src = "../src/assets/pngwing.com.png";
     $imgDumpster.classList.add("img-dumpster");
 
     $divImg.appendChild($imgDumpster);
-
     
     $gameDescriptionDiv.appendChild($divImg);
     
@@ -231,7 +230,7 @@
       spanPrice.textContent = alterTotalvalue(Number(gamePrice) * -1 );
     };
 
-    var $dividerDiv = doc.createElement('div');
+    let $dividerDiv = doc.createElement('div');
     $dividerDiv.classList.add("divider");
 
     array === 1 ? $dividerDiv.classList.add('active-divider-lotomania') : '';
@@ -239,25 +238,24 @@
     array === 3 ? $dividerDiv.classList.add('active-divider-megasena') : '';
 
     $gameDescriptionDiv.appendChild($dividerDiv);
-
     
-    var $descriptionGameDiv = doc.createElement('div');
+    let $descriptionGameDiv = doc.createElement('div');
 
     $descriptionGameDiv.classList.add('description-game');
     
-    var $centralizerDiv = doc.createElement('div');
+    let $centralizerDiv = doc.createElement('div');
     $centralizerDiv.classList.add('centralizer');
 
-    var $spanGameNumbers = doc.createElement('span');
+    let $spanGameNumbers = doc.createElement('span');
     $spanGameNumbers.classList.add('game-numbers');
     $spanGameNumbers.textContent = gameNumbers;
 
     $centralizerDiv.appendChild($spanGameNumbers);
 
-    var $divGamePrice = doc.createElement('div');
+    let $divGamePrice = doc.createElement('div');
     $divGamePrice.classList.add("game-price");
 
-    var $spanGameName = doc.createElement('span');
+    let $spanGameName = doc.createElement('span');
     $spanGameName.classList.add('game-name');    
     array === 1 ? $spanGameName.classList.add('active-span-lotomania') : '';
     array === 2 ? $spanGameName.classList.add('active-span-lotofacil') : '';
@@ -266,7 +264,7 @@
 
     $divGamePrice.appendChild($spanGameName);
 
-    var $spanGameValue = doc.createElement('span');
+    let $spanGameValue = doc.createElement('span');
     $spanGameValue.classList.add('game-value');
     $spanGameValue.textContent = `R$ ${gamePrice}`;
 
@@ -335,15 +333,15 @@
     
     if(gameType === 1) {
       arrayCleaner();
-      var arrayNumeros = [];
-      var aux;
+      let arrayNumeros = [];
+      let aux;
 
-      for(var i = 1; i <= 80; i++) {
+      for(let i = 1; i <= 80; i++) {
         arrayNumeros.push(i);
       }
       
       
-      for (var i = 0; i<5; i++) {
+      for (let i = 0; i<5; i++) {
         aux = Math.floor(Math.random() * (arrayNumeros.length - 1) + 1);
         lotomania.push(arrayNumeros[aux]);        
         arrayNumeros.splice(aux, 1)
