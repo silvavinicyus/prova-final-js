@@ -67,7 +67,13 @@
     }  
   }    
 
-  buttonCreateGame.addEventListener('click', function(e) {
+  buttonCreateGame.addEventListener('click', function(e) {    
+    try {
+      let $gameBox = doc.querySelector('[data-js="game-box-js"]');
+      $gameBox.classList.remove("game-box-flex");
+      emptyCartRemover($gameBox);
+    } catch ( err ){};
+
     if(array === 1) {
       let numerosValidos = checkQtdNumbers(loteryNumbers, 5);
 
@@ -76,7 +82,6 @@
 
         spanPrice.textContent = alterTotalvalue(2);
       }
-
     } else if (array === 2) {
       let numerosValidos = checkQtdNumbers(loteryNumbers, 15);
 
@@ -201,7 +206,7 @@
   });
 
   function createGameElement(gameNumbers, gameName, gamePrice) {
-    let $gameBox = doc.querySelector('[class="game-box"]');
+    let $gameBox = doc.querySelector('[data-js="game-box-js"]');
 
     let $gameDescriptionDiv = doc.createElement('div');    
     $gameDescriptionDiv.classList.add("game-description");
@@ -210,7 +215,7 @@
     $divImg.classList.add("div-img");
 
     let $imgDumpster = doc.createElement('img');
-    $imgDumpster.src = "../src/assets/pngwing.com.png";
+    $imgDumpster.src = "../src/assets/dumpster.png";
     $imgDumpster.classList.add("img-dumpster");
 
     $divImg.appendChild($imgDumpster);
@@ -279,6 +284,41 @@
     
   }
 
+  function verifyEmptyCart(cartValue) {    
+    let $gameBox = doc.querySelector('[data-js="game-box-js"]');
+    $gameBox.classList.remove("game-box-flex");
+
+    if(cartValue <= 0) {            
+      createEmptyCartElement();
+    } 
+  }
+
+  function emptyCartRemover($gameBox) {
+    let $emptyCartDiv = doc.querySelector('[class="empty-cart"]');
+
+    $gameBox.removeChild($emptyCartDiv);
+  }
+
+  function createEmptyCartElement(){
+    let $gameBox = doc.querySelector('[data-js="game-box-js"]');  
+    $gameBox.classList.add("game-box-flex");  
+    
+    let $emptyCartDiv = doc.createElement("div");
+    $emptyCartDiv.classList.add("empty-cart");
+
+    let $imgEmptyCart = doc.createElement("img");
+    $imgEmptyCart.src = "assets/empty-cart.png";
+
+    let $emptyCartSpan = doc.createElement("span");
+    $emptyCartSpan.textContent = "Carrinho Vazio";
+    $emptyCartSpan.classList.add("empty-cart-span");
+
+    $emptyCartDiv.appendChild($imgEmptyCart);
+    $emptyCartDiv.appendChild($emptyCartSpan);
+
+    $gameBox.appendChild($emptyCartDiv);
+  }
+  
   function alterTotalvalue(value) {
     totalValue += Number(value);
 
