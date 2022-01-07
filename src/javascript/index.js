@@ -390,9 +390,7 @@
       while(loteryNumbers.length != 5) {
         aux = Math.floor(Math.random() * (arrayNumeros.length - 1) + 1);
 
-        if(loteryNumbers.includes(arrayNumeros[aux])) {
-          i-=1;                            
-        } else {
+        if(!loteryNumbers.includes(arrayNumeros[aux])) {
           loteryNumbers.push(arrayNumeros[aux]);
         }      
         arrayNumeros.splice(aux, 1);                
@@ -409,9 +407,7 @@
       while(loteryNumbers.length != 15) {
         aux = Math.floor(Math.random() * (arrayNumeros.length - 1) + 1);
 
-        if(loteryNumbers.includes(arrayNumeros[aux])) {
-          i-=1;                            
-        } else {
+        if(!loteryNumbers.includes(arrayNumeros[aux])) {
           loteryNumbers.push(arrayNumeros[aux]);
         }      
         arrayNumeros.splice(aux, 1);                
@@ -429,11 +425,10 @@
       while(loteryNumbers.length != 6) {
         aux = Math.floor(Math.random() * (arrayNumeros.length - 1) + 1);
 
-        if(loteryNumbers.includes(arrayNumeros[aux])) {
-          i-=1;                            
-        } else {
+        if(!loteryNumbers.includes(arrayNumeros[aux])) {          
           loteryNumbers.push(arrayNumeros[aux]);
         }      
+
         arrayNumeros.splice(aux, 1);                
       }          
     }         
