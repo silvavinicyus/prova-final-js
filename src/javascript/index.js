@@ -36,7 +36,7 @@
       }
     })            
     return data;
-  }    
+  }      
 
   dataLoader();
   verifyEmptyCart(totalValue);
@@ -109,7 +109,7 @@
   buttonCompleteGame.addEventListener('click', function(e) {
     e.preventDefault();
 
-    clearGame();
+    clearGame(false);
 
     completeGame(array);
 
@@ -127,6 +127,7 @@
   buttonMania.addEventListener('click', function(e) {
     e.preventDefault();
     dataLoader();
+    arrayCleaner();
 
     buttonMania.classList.toggle("active-lotomania");    
     buttonFacil.classList.remove("active-lotofacil");
@@ -156,6 +157,7 @@
   buttonFacil.addEventListener('click', function(e) {
     e.preventDefault();
     dataLoader();
+    arrayCleaner();
 
     buttonFacil.classList.toggle("active-lotofacil");    
     buttonMania.classList.remove("active-lotomania");
@@ -185,6 +187,7 @@
   buttonSena.addEventListener('click', function(e) {
     e.preventDefault();
     dataLoader();
+    arrayCleaner();
 
     buttonSena.classList.toggle("active-mega");
     buttonMania.classList.remove("active-lotomania");
@@ -205,18 +208,10 @@
     saveParagraph.classList.remove("foot-save-lotomania");
     saveParagraph.classList.remove("foot-save-lotofacil");
 
-    clearGame();
+    clearGame();    
 
     array = arrayDefiner("megasena");
   });
-
-  function convertTotalValue(value) {
-    match = value.match(/(,\d)$/) + "0";
-
-    value = value.replace(/(,\d)$/, (match[0] + "0"));
-
-    return
-  }
 
   function createGameElement(gameNumbers, gameName, gamePrice) {
     let $gameBox = doc.querySelector('[data-js="game-box-js"]');
@@ -381,8 +376,9 @@
 
   function completeGame(gameType) {
     
-    if(gameType === 1) {
-      arrayCleaner();
+    let loteryAlreadyChoosed = loteryNumbers.length;
+
+    if(gameType === 1) {      
       let arrayNumeros = [];
       let aux;
 
@@ -391,13 +387,17 @@
       }
       
       
-      for (let i = 0; i<5; i++) {
+      for (let i = 0; i< ( 5 - loteryAlreadyChoosed ); i++) {
         aux = Math.floor(Math.random() * (arrayNumeros.length - 1) + 1);
-        loteryNumbers.push(arrayNumeros[aux]);        
+        if(loteryNumbers.includes(aux)) {
+          i-=1;
+          console.log("aqui")
+        }else {          
+          loteryNumbers.push(arrayNumeros[aux]);
+        }        
         arrayNumeros.splice(aux, 1)
       }      
-    } else if (gameType === 2) {
-      arrayCleaner();
+    } else if (gameType === 2) {      
 
       var arrayNumeros = [];
       var aux;
@@ -406,26 +406,33 @@
         arrayNumeros.push(i);
       }
       
-      for (var i = 0; i<15; i++) {
-        aux = Math.floor(Math.random() * (arrayNumeros.length - 1) + 1);        
-        loteryNumbers.push(arrayNumeros[aux]);        
-        arrayNumeros.splice(aux, 1)        
+      for (var i = 0; i<(15 - loteryAlreadyChoosed); i++) {
+        aux = Math.floor(Math.random() * (arrayNumeros.length - 1) + 1);
+        if(loteryNumbers.includes(aux)) {
+          i-=1;
+          console.log("aqui")
+        }else {
+          loteryNumbers.push(arrayNumeros[aux]);
+          arrayNumeros.splice(aux, 1)        
+        }      
       }      
-    } else if (gameType === 3) {
-      arrayCleaner();
+    } else if (gameType === 3) {      
 
       var arrayNumeros = [];
       var aux;
-
 
       for(var i = 1; i <= 60; i++) {
         arrayNumeros.push(i);
       }
       
-      for (var i = 0; i<6; i++) {
+      for (var i = 0; i<(6 - loteryAlreadyChoosed); i++) {        
         aux = Math.floor(Math.random() * (arrayNumeros.length - 1) + 1);
-        loteryNumbers.push(arrayNumeros[aux]);        
-        arrayNumeros.splice(aux, 1)
+        if(loteryNumbers.includes(aux)) {
+          i-=1;
+        }else {
+          loteryNumbers.push(arrayNumeros[aux]);
+          arrayNumeros.splice(aux, 1)
+        }        
       }      
     }         
   }
@@ -441,8 +448,11 @@
     }
   }
 
-  function clearGame() {
-    arrayCleaner();
+  function clearGame(limparArray = true) {
+    if(limparArray) {
+      arrayCleaner();
+      console.log("entrou no de limpar o array")
+    }
 
     numberBottons.forEach(function(item) {
       item.classList.remove("active-number-botton-mania"); 
