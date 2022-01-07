@@ -306,19 +306,19 @@ body{
 .active-number-botton-mania {
   background: #F79C31;
   color: white;
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 .active-number-botton-facil {
   background: #7F3992;
   color: white;
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 .active-number-botton-sena {
   background: #01AC66;
   color: white;
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 

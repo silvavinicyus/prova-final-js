@@ -326,6 +326,10 @@
 
     $gameBox.appendChild($emptyCartDiv);
   }
+
+  function disableButtonsAfterGameComplete(max) {
+
+  }
   
   function alterTotalvalue(value) {
     totalValue += Number(value);
@@ -335,7 +339,7 @@
 
   function checkQtdNumbers(array, max) {
     if(array.length !== max) {
-      alert("Selecione " + max + " números!");
+      alert("Selecione mais " + (max - loteryNumbers.length) + " números!");
       return false;
     } 
 
@@ -374,10 +378,7 @@
     loteryNumbers = [];
   }
 
-  function completeGame(gameType) {
-    
-    let loteryAlreadyChoosed = loteryNumbers.length;
-
+  function completeGame(gameType) {        
     if(gameType === 1) {      
       let arrayNumeros = [];
       let aux;
@@ -396,7 +397,6 @@
         arrayNumeros.splice(aux, 1);                
       } 
     } else if (gameType === 2) {      
-
       var arrayNumeros = [];
       var aux;
 
@@ -464,17 +464,34 @@
 
       switch (array){
         case 1:
-          
-          loteryNumbers.push(Number(item.textContent))
-          item.classList.add("active-number-botton-mania");                                       
+          if(!item.classList.contains("active-number-botton-mania")) {
+            loteryNumbers.push(Number(item.textContent))
+            item.classList.add("active-number-botton-mania");                                       
+          } else {
+            loteryNumbers.splice(loteryNumbers.indexOf(Number(item.textContent)), 1);
+            item.classList.remove("active-number-botton-mania");                                       
+          }          
+
           break;
         case 2:          
-          loteryNumbers.push(Number(item.textContent));
-          item.classList.add("active-number-botton-facil");               
+          if(!item.classList.contains("active-number-botton-facil")) {
+            loteryNumbers.push(Number(item.textContent))
+            item.classList.add("active-number-botton-facil");                                       
+          } else {
+            loteryNumbers.splice(loteryNumbers.indexOf(Number(item.textContent)), 1);
+            item.classList.remove("active-number-botton-facil");                                       
+          }   
+
           break;
         case 3:
-          loteryNumbers.push(Number(item.textContent));  
-          item.classList.add("active-number-botton-sena");               
+          
+          if(!item.classList.contains("active-number-botton-sena")) {
+            loteryNumbers.push(Number(item.textContent))
+            item.classList.add("active-number-botton-sena");                                       
+          } else {
+            loteryNumbers.splice(loteryNumbers.indexOf(Number(item.textContent)), 1);
+            item.classList.remove("active-number-botton-sena");                                       
+          } 
           break;    
       }      
     });
