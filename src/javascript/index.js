@@ -53,8 +53,7 @@
 
     let $description = doc.querySelector('[data-js="game-describer"]');    
 
-    spanPrice.textContent = totalValue;
-
+    spanPrice.textContent = totalValue.toLocaleString('pt-br', {minimumFractionDigits: 2});
     if(array === 1){
       $title.textContent = data["types"][2]["type"];
       $description.textContent = data["types"][2]["description"];
@@ -78,9 +77,9 @@
       let numerosValidos = checkQtdNumbers(loteryNumbers, 5);
 
       if(numerosValidos) {
-        createGameElement(loteryNumbers, "Lotomania", "2,00");
+        createGameElement(loteryNumbers, "Lotomania", "2,00");               
 
-        spanPrice.textContent = alterTotalvalue(2);
+        spanPrice.textContent = alterTotalvalue(2).toLocaleString('pt-br', {minimumFractionDigits: 2});
 
         clearGame();
       }
@@ -89,8 +88,8 @@
 
       if(numerosValidos) {
         createGameElement(loteryNumbers, "Lotofácil", "2,50");
-
-        spanPrice.textContent = alterTotalvalue(2.5);
+        
+        spanPrice.textContent =  alterTotalvalue(2.5).toLocaleString('pt-br', {minimumFractionDigits: 2});
         clearGame();
       }
 
@@ -99,8 +98,9 @@
 
       if(numerosValidos) {
         createGameElement(loteryNumbers, "Mega-Sena", "4,50");
-        
-        spanPrice.textContent = alterTotalvalue(4.5);
+              
+
+        spanPrice.textContent = alterTotalvalue(4.5).toLocaleString('pt-br', {minimumFractionDigits: 2});
         clearGame();
       }
     }
@@ -210,6 +210,14 @@
     array = arrayDefiner("megasena");
   });
 
+  function convertTotalValue(value) {
+    match = value.match(/(,\d)$/) + "0";
+
+    value = value.replace(/(,\d)$/, (match[0] + "0"));
+
+    return
+  }
+
   function createGameElement(gameNumbers, gameName, gamePrice) {
     let $gameBox = doc.querySelector('[data-js="game-box-js"]');
 
@@ -233,7 +241,7 @@
       
       gamePrice = gamePrice.replace(/,/, '.');            
 
-      spanPrice.textContent = alterTotalvalue(Number(gamePrice) * -1 );
+      spanPrice.textContent = alterTotalvalue(Number(gamePrice) * -1 ).toLocaleString('pt-br', {minimumFractionDigits: 2});;
 
       verifyEmptyCart(totalValue);      
       console.log(totalValue);
