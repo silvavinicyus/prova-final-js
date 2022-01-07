@@ -265,7 +265,7 @@
 
     let $spanGameNumbers = doc.createElement('span');
     $spanGameNumbers.classList.add('game-numbers');
-    $spanGameNumbers.textContent = gameNumbers;
+    $spanGameNumbers.textContent = gameNumbers.sort((a, b) => a - b);
 
     $centralizerDiv.appendChild($spanGameNumbers);
 
