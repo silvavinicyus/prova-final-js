@@ -387,16 +387,16 @@
       }
       
       
-      for (let i = 0; i< ( 5 - loteryAlreadyChoosed ); i++) {
+      while(loteryNumbers.length != 5) {
         aux = Math.floor(Math.random() * (arrayNumeros.length - 1) + 1);
-        if(loteryNumbers.includes(aux)) {
-          i-=1;
-          console.log("aqui")
-        }else {          
+
+        if(loteryNumbers.includes(arrayNumeros[aux])) {
+          i-=1;                            
+        } else {
           loteryNumbers.push(arrayNumeros[aux]);
-        }        
-        arrayNumeros.splice(aux, 1)
-      }      
+        }      
+        arrayNumeros.splice(aux, 1);                
+      } 
     } else if (gameType === 2) {      
 
       var arrayNumeros = [];
@@ -406,16 +406,17 @@
         arrayNumeros.push(i);
       }
       
-      for (var i = 0; i<(15 - loteryAlreadyChoosed); i++) {
+      while(loteryNumbers.length != 15) {
         aux = Math.floor(Math.random() * (arrayNumeros.length - 1) + 1);
-        if(loteryNumbers.includes(aux)) {
-          i-=1;
-          console.log("aqui")
-        }else {
+
+        if(loteryNumbers.includes(arrayNumeros[aux])) {
+          i-=1;                            
+        } else {
           loteryNumbers.push(arrayNumeros[aux]);
-          arrayNumeros.splice(aux, 1)        
         }      
-      }      
+        arrayNumeros.splice(aux, 1);                
+      }
+
     } else if (gameType === 3) {      
 
       var arrayNumeros = [];
@@ -425,15 +426,16 @@
         arrayNumeros.push(i);
       }
       
-      for (var i = 0; i<(6 - loteryAlreadyChoosed); i++) {        
+      while(loteryNumbers.length != 6) {
         aux = Math.floor(Math.random() * (arrayNumeros.length - 1) + 1);
-        if(loteryNumbers.includes(aux)) {
-          i-=1;
-        }else {
+
+        if(loteryNumbers.includes(arrayNumeros[aux])) {
+          i-=1;                            
+        } else {
           loteryNumbers.push(arrayNumeros[aux]);
-          arrayNumeros.splice(aux, 1)
-        }        
-      }      
+        }      
+        arrayNumeros.splice(aux, 1);                
+      }          
     }         
   }
   
@@ -467,18 +469,19 @@
 
       switch (array){
         case 1:
-          loteryNumbers.push(item.textContent)
+          
+          loteryNumbers.push(Number(item.textContent))
           item.classList.add("active-number-botton-mania");                                       
           break;
-        case 2:
-          loteryNumbers.push(item.textContent);
+        case 2:          
+          loteryNumbers.push(Number(item.textContent));
           item.classList.add("active-number-botton-facil");               
           break;
         case 3:
-          loteryNumbers.push(item.textContent);  
+          loteryNumbers.push(Number(item.textContent));  
           item.classList.add("active-number-botton-sena");               
           break;    
       }      
     });
-  });  
+  });    
 })(window, document);
