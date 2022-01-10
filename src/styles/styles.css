@@ -321,6 +321,10 @@ body{
   /* pointer-events: none; */
 }
 
+.game-complete {
+  pointer-events: none;
+}
+
 
 .img-dumpster {
   width: 30px;

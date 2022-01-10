@@ -327,8 +327,25 @@
     $gameBox.appendChild($emptyCartDiv);
   }
 
-  function disableButtonsAfterGameComplete(max) {
-
+  function disableButtonsAfterGameComplete(max) { 
+    console.log(loteryNumbers)   
+    if(loteryNumbers.length === max) {
+      numberBottons.forEach((item) => {
+        if(!loteryNumbers.includes(+item.textContent)) {          
+          item.classList.add("game-complete");
+        } else {
+          console.log(item)
+        }
+      });
+    } else {
+      numberBottons.forEach((item) => {
+        if(!loteryNumbers.includes(+item.textContent)) {
+          item.classList.remove("game-complete");
+        } else {
+          console.log(item)
+        }
+      });
+    }
   }
   
   function alterTotalvalue(value) {
@@ -344,7 +361,7 @@
     } 
 
     return true;
-  }  
+  }
 
   function fullFillNumberFields(array){    
     if(array === 1) {
@@ -355,6 +372,7 @@
           }
         })
       });
+      disableButtonsAfterGameComplete(5);
     } else if (array === 2) {
       loteryNumbers.forEach(function(numero){
         numberBottons.forEach(function(item) {
@@ -363,13 +381,15 @@
           }
         })
       });
+      disableButtonsAfterGameComplete(15);
     } else if (array === 3) {
       loteryNumbers.forEach(function(numero){
         numberBottons.forEach(function(item) {
           if(+item.textContent === +numero) {
             item.classList.add("active-number-botton-sena");
           }
-        })
+        });
+        disableButtonsAfterGameComplete(6);
       });
     }
   }
@@ -395,7 +415,7 @@
           loteryNumbers.push(arrayNumeros[aux]);
         }      
         arrayNumeros.splice(aux, 1);                
-      } 
+      }       
     } else if (gameType === 2) {      
       var arrayNumeros = [];
       var aux;
@@ -411,7 +431,7 @@
           loteryNumbers.push(arrayNumeros[aux]);
         }      
         arrayNumeros.splice(aux, 1);                
-      }
+      }      
 
     } else if (gameType === 3) {      
 
@@ -430,8 +450,10 @@
         }      
 
         arrayNumeros.splice(aux, 1);                
-      }          
-    }         
+      }                
+    }   
+    
+    
   }
   
   function arrayDefiner(option) {
@@ -455,6 +477,7 @@
       item.classList.remove("active-number-botton-mania"); 
       item.classList.remove("active-number-botton-facil"); 
       item.classList.remove("active-number-botton-sena");  
+      item.classList.remove("game-complete");
     });
   }
 
@@ -466,12 +489,13 @@
         case 1:
           if(!item.classList.contains("active-number-botton-mania")) {
             loteryNumbers.push(Number(item.textContent))
-            item.classList.add("active-number-botton-mania");                                       
+            item.classList.add("active-number-botton-mania");      
           } else {
             loteryNumbers.splice(loteryNumbers.indexOf(Number(item.textContent)), 1);
             item.classList.remove("active-number-botton-mania");                                       
-          }          
-
+          }                    
+          disableButtonsAfterGameComplete(5);
+          console.log(loteryNumbers)
           break;
         case 2:          
           if(!item.classList.contains("active-number-botton-facil")) {
@@ -481,17 +505,17 @@
             loteryNumbers.splice(loteryNumbers.indexOf(Number(item.textContent)), 1);
             item.classList.remove("active-number-botton-facil");                                       
           }   
-
+          disableButtonsAfterGameComplete(15);
           break;
-        case 3:
-          
+        case 3:          
           if(!item.classList.contains("active-number-botton-sena")) {
-            loteryNumbers.push(Number(item.textContent))
+            loteryNumbers.push(Number(item.textContent));
             item.classList.add("active-number-botton-sena");                                       
           } else {
             loteryNumbers.splice(loteryNumbers.indexOf(Number(item.textContent)), 1);
             item.classList.remove("active-number-botton-sena");                                       
           } 
+          disableButtonsAfterGameComplete(6);          
           break;    
       }      
     });
