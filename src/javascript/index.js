@@ -34,7 +34,7 @@
 
         contentLoader(data);
       }
-    })            
+    });
     return data;
   }      
 
@@ -46,7 +46,6 @@
   buttonClearGame.classList.add("complete-clear-border-lotofacil");
   buttonCreateGame.classList.add("create-game-lotofacil");
   saveParagraph.classList.add("foot-save-lotofacil");
-
 
   function contentLoader(data) {
     let $title = doc.querySelector('[data-js="game-type"]');
