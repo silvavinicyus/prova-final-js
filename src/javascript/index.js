@@ -7,7 +7,7 @@
 
   let array = 2;
 
-  let numberBottons = doc.querySelectorAll('[class="numbers"]');
+  let numberBottons;
 
   let buttonMania = doc.querySelector('[data-js="button-lotomania"');
   let buttonFacil = doc.querySelector('[data-js="button-lotofacil"');
@@ -33,35 +33,98 @@
         data = JSON.parse(ajax.responseText);                 
 
         contentLoader(data);
-        dataChecker(data["types"]);
-        firstLoader(data["types"][0]["type"]);
+        dataChecker(data["types"]);        
       }
     });
     return data;
   } 
 
-  function firstLoader(game) {    
-    if(game === "Lotofácil") {
-      buttonFacil.classList.add("active-lotofacil");
-      buttonCompleteGame.classList.add("complete-clear-border-lotofacil");
-      buttonClearGame.classList.add("complete-clear-border-lotofacil");
-      buttonCreateGame.classList.add("create-game-lotofacil");
-      saveParagraph.classList.add("foot-save-lotofacil");
+  function numberElementLoader(game) {
+    let ajax = new XMLHttpRequest();
 
-    } else if(game === "Mega-Sena") {
-      buttonFacil.classList.add("active-mega");
-      buttonCompleteGame.classList.add("complete-clear-border-megasena");
-      buttonClearGame.classList.add("complete-clear-border-megasena");
-      buttonCreateGame.classList.add("create-game-megasena");
-      saveParagraph.classList.add("foot-save-megasena");
+    ajax.open('GET', "assets/games.json");
+    ajax.send();
 
-    } else if(game === "Lotomania") {
-      buttonFacil.classList.add("active-lotomania");
-      buttonCompleteGame.classList.add("complete-clear-border-lotomania");
-      buttonClearGame.classList.add("complete-clear-border-lotomania");
-      buttonCreateGame.classList.add("create-game-lotomania");
-      saveParagraph.classList.add("foot-save-lotomania");
-    }    
+    let data; 
+
+    data = ajax.addEventListener('readystatechange', function()  {
+      if(ajax.readyState === 4 && ajax.status === 200) {
+        data = JSON.parse(ajax.responseText);                 
+        
+        numberElementCreator(data["types"][game]["range"]);
+        console.log(data["types"][game]["range"]);
+      }
+    });
+    return data;
+  }
+
+  function numberElementCreator(max) {
+    let $numbersDiv = doc.querySelector('[class="numbers-div"]');
+
+    let $numbersContainer = doc.querySelector('[class="numbers-container"]'); 
+
+    $numbersDiv.removeChild($numbersContainer);
+
+    let $newNumbersContainer = doc.createElement('div');
+    $newNumbersContainer.classList.add("numbers-container");
+
+
+    for(let i = 1; i <= max; i++) {      
+      let $numberElement = doc.createElement('div');
+      i <= 9 ? $numberElement.textContent = `0${i}` : $numberElement.textContent = i;
+      $numberElement.classList.add("numbers");
+
+      $newNumbersContainer.appendChild($numberElement);
+    }
+
+    $numbersDiv.appendChild($newNumbersContainer); 
+    numberBottons = doc.querySelectorAll('[class="numbers"]');
+    numbersLoader(numberBottons);
+  }
+
+  function firstLoader() {       
+    let ajax = new XMLHttpRequest();
+
+    ajax.open('GET', "assets/games.json");
+    ajax.send();
+
+    let data; 
+    let game;
+    let max;
+
+    data = ajax.addEventListener('readystatechange', function()  {
+      if(ajax.readyState === 4 && ajax.status === 200) {
+        data = JSON.parse(ajax.responseText);                 
+
+        game = data["types"][0]["type"];
+        max = data["types"][0]["range"];
+
+        numberElementCreator(max);
+
+        if(game === "Lotofácil") {
+          buttonFacil.classList.add("active-lotofacil");
+          buttonCompleteGame.classList.add("complete-clear-border-lotofacil");
+          buttonClearGame.classList.add("complete-clear-border-lotofacil");
+          buttonCreateGame.classList.add("create-game-lotofacil");
+          saveParagraph.classList.add("foot-save-lotofacil");
+    
+        } else if(game === "Mega-Sena") {
+          buttonFacil.classList.add("active-mega");
+          buttonCompleteGame.classList.add("complete-clear-border-megasena");
+          buttonClearGame.classList.add("complete-clear-border-megasena");
+          buttonCreateGame.classList.add("create-game-megasena");
+          saveParagraph.classList.add("foot-save-megasena");
+    
+        } else if(game === "Lotomania") {
+          buttonFacil.classList.add("active-lotomania");
+          buttonCompleteGame.classList.add("complete-clear-border-lotomania");
+          buttonClearGame.classList.add("complete-clear-border-lotomania");
+          buttonCreateGame.classList.add("create-game-lotomania");
+          saveParagraph.classList.add("foot-save-lotomania");
+        }    
+      }
+    });
+    return data;    
   }
   
   function dataChecker(data) {
@@ -78,9 +141,8 @@
   verifyEmptyCart(totalValue);
   dataLoader();
   firstLoader();
-
   
-
+  
   function contentLoader(data) {
     let $title = doc.querySelector('[data-js="game-type"]');
 
@@ -160,6 +222,7 @@
   buttonMania.addEventListener('click', function(e) {
     e.preventDefault();
     dataLoader();
+    numberElementLoader(2);
     arrayCleaner();
 
     buttonMania.classList.toggle("active-lotomania");    
@@ -190,6 +253,7 @@
   buttonFacil.addEventListener('click', function(e) {
     e.preventDefault();
     dataLoader();
+    numberElementLoader(0);
     arrayCleaner();
 
     buttonFacil.classList.toggle("active-lotofacil");    
@@ -220,6 +284,7 @@
   buttonSena.addEventListener('click', function(e) {
     e.preventDefault();
     dataLoader();
+    numberElementLoader(1);
     arrayCleaner();
 
     buttonSena.classList.toggle("active-mega");
@@ -514,43 +579,49 @@
     });
   }
 
-  numberBottons.forEach(function(item) {
-    item.addEventListener('click', function(e) {
-      e.preventDefault();      
-
-      switch (array){
-        case 1:
-          if(!item.classList.contains("active-number-botton-mania")) {
-            loteryNumbers.push(Number(item.textContent))
-            item.classList.add("active-number-botton-mania");      
-          } else {
-            loteryNumbers.splice(loteryNumbers.indexOf(Number(item.textContent)), 1);
-            item.classList.remove("active-number-botton-mania");                                       
-          }                    
-          disableButtonsAfterGameComplete(5);
-          console.log(loteryNumbers)
-          break;
-        case 2:          
-          if(!item.classList.contains("active-number-botton-facil")) {
-            loteryNumbers.push(Number(item.textContent))
-            item.classList.add("active-number-botton-facil");                                       
-          } else {
-            loteryNumbers.splice(loteryNumbers.indexOf(Number(item.textContent)), 1);
-            item.classList.remove("active-number-botton-facil");                                       
-          }   
-          disableButtonsAfterGameComplete(15);
-          break;
-        case 3:          
-          if(!item.classList.contains("active-number-botton-sena")) {
-            loteryNumbers.push(Number(item.textContent));
-            item.classList.add("active-number-botton-sena");                                       
-          } else {
-            loteryNumbers.splice(loteryNumbers.indexOf(Number(item.textContent)), 1);
-            item.classList.remove("active-number-botton-sena");                                       
-          } 
-          disableButtonsAfterGameComplete(6);          
-          break;    
-      }      
-    });
-  });    
+  function numbersLoader(numberBottons) {
+    numberBottons.forEach(function(item) {
+      item.addEventListener('click', function(e) {
+        e.preventDefault();      
+  
+        switch (array){
+          case 1:
+            if(!item.classList.contains("active-number-botton-mania")) {
+              loteryNumbers.push(Number(item.textContent))
+              item.classList.add("active-number-botton-mania");      
+            } else {
+              loteryNumbers.splice(loteryNumbers.indexOf(Number(item.textContent)), 1);
+              item.classList.remove("active-number-botton-mania");                                       
+            }                    
+            disableButtonsAfterGameComplete(5);
+            console.log(loteryNumbers)        ;
+            console.log(loteryNumbers)
+            break;
+          case 2:          
+            if(!item.classList.contains("active-number-botton-facil")) {
+              loteryNumbers.push(Number(item.textContent))
+              item.classList.add("active-number-botton-facil");                                       
+            } else {
+              loteryNumbers.splice(loteryNumbers.indexOf(Number(item.textContent)), 1);
+              item.classList.remove("active-number-botton-facil");                                       
+            }   
+            console.log(loteryNumbers)        ;
+            disableButtonsAfterGameComplete(15);
+            break;
+          case 3:  
+            
+            if(!item.classList.contains("active-number-botton-sena")) {
+              loteryNumbers.push(Number(item.textContent));
+              item.classList.add("active-number-botton-sena");                                       
+            } else {
+              loteryNumbers.splice(loteryNumbers.indexOf(Number(item.textContent)), 1);
+              item.classList.remove("active-number-botton-sena");                                       
+            } 
+            disableButtonsAfterGameComplete(6);    
+            console.log(loteryNumbers)        ;      
+            break;    
+        }      
+      });
+    });  
+  }
 })(window, document);

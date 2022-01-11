@@ -148,11 +148,16 @@ body{
 }
 
 .numbers-div {
-  display: flex;
+  margin-top: 2em;
+}
+
+.numbers-container {  
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
   flex-direction: column;
-  height: 25em;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  max-height: 25em;  
+  overflow: auto;
+
 }
 
 .numbers-page {
@@ -163,8 +168,8 @@ body{
   display: flex;  
   align-items: center;
   justify-content: center;
-  width: 200px;
-  height: 65px;    
+  width: 60px;
+  height: 60px;    
   border-radius: 100%;
   margin-right: 10px;
   background: #ADC0C4;
@@ -298,8 +303,7 @@ body{
 .game-box {
   width: 100%;
   height: 15.8em;
-  overflow-y: scroll;
-  overflow-x: hidden;  
+  overflow: auto;  
 }
 
 .cart-total {
@@ -490,3 +494,14 @@ body{
   font-size: 35px;
   color: black;
 }
+/* 
+@media (max-height: 25em) {
+  .numbers-container {  
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    flex-direction: column;
+    max-height: 25em;
+    overflow-y: scroll;
+    overflow-x: hidden;    
+  }  
+} */
