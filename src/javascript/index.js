@@ -33,19 +33,53 @@
         data = JSON.parse(ajax.responseText);                 
 
         contentLoader(data);
+        dataChecker(data["types"]);
+        firstLoader(data["types"][0]["type"]);
       }
     });
     return data;
-  }      
+  } 
 
-  dataLoader();
+  function firstLoader(game) {    
+    if(game === "Lotofácil") {
+      buttonFacil.classList.add("active-lotofacil");
+      buttonCompleteGame.classList.add("complete-clear-border-lotofacil");
+      buttonClearGame.classList.add("complete-clear-border-lotofacil");
+      buttonCreateGame.classList.add("create-game-lotofacil");
+      saveParagraph.classList.add("foot-save-lotofacil");
+
+    } else if(game === "Mega-Sena") {
+      buttonFacil.classList.add("active-mega");
+      buttonCompleteGame.classList.add("complete-clear-border-megasena");
+      buttonClearGame.classList.add("complete-clear-border-megasena");
+      buttonCreateGame.classList.add("create-game-megasena");
+      saveParagraph.classList.add("foot-save-megasena");
+
+    } else if(game === "Lotomania") {
+      buttonFacil.classList.add("active-lotomania");
+      buttonCompleteGame.classList.add("complete-clear-border-lotomania");
+      buttonClearGame.classList.add("complete-clear-border-lotomania");
+      buttonCreateGame.classList.add("create-game-lotomania");
+      saveParagraph.classList.add("foot-save-lotomania");
+    }    
+  }
+  
+  function dataChecker(data) {
+    data.forEach((item) => {
+      if(item["type"] === "Lotofácil") {
+        buttonFacil.classList.add("visible-class");
+      } else if(item["type"] === "Mega-Sena") {
+        buttonSena.classList.add("visible-class");
+      } else if(item["type"] === "Lotomania") {
+        buttonMania.classList.add("visible-class");
+      }
+    });
+  }
   verifyEmptyCart(totalValue);
+  dataLoader();
+  firstLoader();
 
-  buttonFacil.classList.add("active-lotofacil");
-  buttonCompleteGame.classList.add("complete-clear-border-lotofacil");
-  buttonClearGame.classList.add("complete-clear-border-lotofacil");
-  buttonCreateGame.classList.add("create-game-lotofacil");
-  saveParagraph.classList.add("foot-save-lotofacil");
+  
 
   function contentLoader(data) {
     let $title = doc.querySelector('[data-js="game-type"]');
@@ -63,7 +97,7 @@
       $title.textContent = data["types"][1]["type"];
       $description.textContent = data["types"][1]["description"];
     }  
-  }    
+  }
 
   buttonCreateGame.addEventListener('click', function(e) {    
     try {

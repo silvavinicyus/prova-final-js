@@ -87,6 +87,23 @@ body{
 }
 
 .lotofacil, .megasena, .lotomania {    
+  display: none;
+  transition: 0.3s;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  background: white;
+  border-radius: 20px;
+  width: 100px;
+  height: 30px;
+  font-size: 14px;  
+  margin-right: 2em;
+}
+
+.visible-class {
+  display: inline;
+}
+
+.button-games {    
   transition: 0.3s;
   cursor: pointer;
   font-family: 'Roboto', sans-serif;
@@ -123,6 +140,8 @@ body{
   border: 2px solid #F79C31;
 }
 
+
+
 .lotomania:hover {
   background: #F79C31;
   color: white;
@@ -137,7 +156,7 @@ body{
 }
 
 .numbers-page {
-  display: flex;
+  display: flex;  
 }
 
 .numbers {    
