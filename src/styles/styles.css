@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 header {
   font: 'Roboto', sans-serif;
   display: flex;
@@ -15,6 +17,15 @@ body{
   color: #707070;
   margin: 0 0 0 0;
   background: #F7F7F7 0% 0% no-repeat padding-box;
+}
+
+.divider-header {
+  margin-top: -5.5px;
+  margin-left: 10.2em;
+  height: 7px;
+  width: 107px;  
+  background-color: #B5C401;
+  border-radius: 10em;
 }
 
 .header-left {
@@ -41,12 +52,21 @@ body{
 
 }
 
+.tgl, .account, .home, .logout {
+  background: #F7F7F7;
+  transition: 0.3s;
+}
+
+/* 
+.tgl:hover, .account:hover, .home:hover, .logout:hover {
+  background-color: linear-gradient( rgba(0, 0, 0, 1),  rgba(0, 0, 0, 1) ), #F7F7F7;
+} */
+
 .account, .logout {
   cursor: pointer;
   font-size: 20px;  
   font-style: italic;
   font-weight: 700;
-
 }
 
 
@@ -70,16 +90,18 @@ body{
 
 .title {  
   font-size: 24px;  
-  font-style: italic;
+  font-style: italic;  
 }
 
 .subtitle{
   padding-top: 33px;
   font-weight: 700;  
+  font-style: italic;
 }
 
 .description {
   font-size: 17px;
+  font-style: italic;
 }
 
 .game-selector {
